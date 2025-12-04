@@ -1,0 +1,22 @@
+import tkinter as tk
+def caesar_cipher(text, shift):
+    result = []
+    for char in text:
+        if char.isalpha():
+            start = ord('А') if char.isupper() else ord('а')
+            offset = ((ord(char) - start + shift) % 26)
+            new_char = chr(start + offset)
+        else:
+            new_char = char
+        result.append(new_char)
+    return ''.join(result)
+def encrypt_decrypt():
+    input_text = entry.get()
+    try:
+        shift_value = int(shift_entry.get())
+    except ValueError:
+        output_label.config(text="Ошибка: введите целое число")
+        return
+
+    encrypted_text = caesar_cipher(input_text, shift_value)
+    output_label.config(text=encrypted_text)
